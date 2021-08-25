@@ -1,0 +1,8 @@
+@import '../../../styles/colors.scss';
+
+.container {
+  display: flex;
+  margin-top: 6rem;
+  background-color: $almost-white;
+  min-height: 100vh;
+}

@@ -1,9 +1,9 @@
+import React from 'react';
+
+import Shop from './components/Screens/Shop/Shop';
+
 function App() {
-  return (
-    <div className="App">
-      <h1>Hello</h1>
-    </div>
-  );
+  return <Shop />;
 }
 
 export default App;

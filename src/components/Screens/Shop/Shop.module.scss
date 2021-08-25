@@ -2,7 +2,20 @@
 
 .container {
   display: flex;
-  margin-top: 6rem;
+  padding-top: 6rem;
   background-color: $almost-white;
   min-height: 100vh;
+
+  .product-catalog {
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 3rem 2rem;
+
+    & > :nth-child(n) {
+      margin: 2rem;
+    }
+  }
 }

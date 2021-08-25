@@ -1,12 +1,14 @@
 @import '../../../styles//colors.scss';
 
 .container {
-  border-right: 1px solid $primary-color;
   padding: 2rem;
+  box-shadow: -5px 0 7px 3px $primary-color;
 
   .list {
     padding-right: 3rem;
+
     .list-item {
+      color: $primary-color;
       font-size: 1.4rem;
       padding: 1rem 0;
     }

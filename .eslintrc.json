@@ -21,6 +21,8 @@
 	],
 	"rules": {
 		"prettier/prettier": "error",
-		"quotes": 0
+		"quotes": 0,
+		"react/prop-types": [0]
+
 	}
 }

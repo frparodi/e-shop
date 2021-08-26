@@ -6,7 +6,7 @@ import classes from './Sidebar.module.scss';
 
 const Sidebar = () => {
   return (
-    <aside className={classes.container}>
+    <nav className={classes.container}>
       <ul className={classes.list}>
         {CATEGORIES.map((cat) => (
           <li key={cat} className={classes['list-item']}>
@@ -14,7 +14,7 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
-    </aside>
+    </nav>
   );
 };
 

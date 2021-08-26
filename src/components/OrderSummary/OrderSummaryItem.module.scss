@@ -1,0 +1,10 @@
+@import '../../styles/colors.scss';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  .price {
+    font-weight: bold;
+  }
+}

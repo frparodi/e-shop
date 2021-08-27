@@ -4,6 +4,11 @@
   display: flex;
   justify-content: space-between;
 
+  .name,
+  .price {
+    font-size: 1.2rem;
+  }
+
   .price {
     font-weight: bold;
   }

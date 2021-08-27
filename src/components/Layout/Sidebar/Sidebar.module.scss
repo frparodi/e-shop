@@ -1,16 +1,17 @@
 @import '../../../styles//colors.scss';
 
 .container {
-  padding: 2rem;
-  box-shadow: -5px 0 7px 3px $primary-color;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  min-width: 20rem;
+  padding-top: 3rem;
 
-  .list {
-    padding-right: 3rem;
+  &.left {
+    box-shadow: -5px 0 7px 3px $primary-color;
+  }
 
-    .list-item {
-      color: $primary-color;
-      font-size: 1.4rem;
-      padding: 1rem 0;
-    }
+  &.right {
+    border-left: 1px solid $primary-color;
   }
 }

@@ -1,19 +1,11 @@
 import React from 'react';
 
-import { CATEGORIES } from '../../../constants/dummyData';
-
 import classes from './Sidebar.module.scss';
 
-const Sidebar = () => {
+const Sidebar = ({ children, position = 'left' }) => {
   return (
-    <nav className={classes.container}>
-      <ul className={classes.list}>
-        {CATEGORIES.map((cat) => (
-          <li key={cat} className={classes['list-item']}>
-            {cat}
-          </li>
-        ))}
-      </ul>
+    <nav className={`${classes.container} ${classes[position]}`}>
+      {children}
     </nav>
   );
 };

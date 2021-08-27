@@ -4,8 +4,8 @@ import Navbar from '../../Layout/Navbar/Navbar';
 import Sidebar from '../../Layout/Sidebar/Sidebar';
 import OrderSummary from '../../OrderSummary/OrderSummary';
 
-import { PRODUCTS } from '../../../constants/dummyData';
-import ProductItem from './ProductItem';
+import { CATEGORIES, PRODUCTS } from '../../../constants/dummyData';
+import ProductSection from './ProductSection';
 
 import classes from './Shop.module.scss';
 
@@ -14,15 +14,27 @@ const Shop = () => {
     <>
       <Navbar />
       <main className={classes.container}>
-        <Sidebar />
+        <Sidebar>
+          <ul className={classes.list}>
+            {CATEGORIES.map((cat) => (
+              <li key={cat.id} className={classes['list-item']}>
+                {cat.name}
+              </li>
+            ))}
+          </ul>
+        </Sidebar>
         <div className={classes['product-catalog']}>
-          {PRODUCTS.map((pr) => (
-            <ProductItem key={pr.id} product={pr} />
+          {CATEGORIES.map((cat) => (
+            <ProductSection
+              key={cat.id}
+              sectionName={cat.name}
+              products={PRODUCTS.filter((p) => p.categoryId === cat.id)}
+            />
           ))}
         </div>
-        <aside className={classes.aside}>
+        <Sidebar position="right">
           <OrderSummary />
-        </aside>
+        </Sidebar>
       </main>
     </>
   );

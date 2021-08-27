@@ -8,22 +8,20 @@
 
   .product-catalog {
     display: flex;
-    align-items: flex-start;
-    flex: 1;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    padding: 3rem 2rem;
-
-    & > :nth-child(n) {
-      margin: 2rem;
-    }
-  }
-
-  .aside {
-    display: flex;
     flex-direction: column;
-    padding: 3rem 2rem 0;
-    min-width: 20rem;
-    border-left: 1px solid $primary-color;
+    flex: 1;
+    padding: 4rem;
+    height: calc(100vh - 6rem);
+    overflow: auto;
+  }
+}
+
+.list {
+  padding: 2rem 3rem;
+
+  .list-item {
+    color: $primary-color;
+    font-size: 1.4rem;
+    padding: 1rem 0;
   }
 }

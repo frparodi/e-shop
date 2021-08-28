@@ -1,0 +1,40 @@
+@import '../../../styles/colors';
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 5px;
+  padding: 0.8em 1em;
+  cursor: pointer;
+  background-color: inherit;
+
+  &.primary {
+    background-color: $primary-color;
+    color: $white;
+
+    &:hover {
+      background-color: $primary-color-hovered;
+    }
+  }
+
+  &.outlined {
+    background-color: $white;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+  }
+
+  &.text {
+    color: $primary-color;
+    font-weight: bold;
+    padding: 0 1rem;
+    font-size: 1.4rem;
+  }
+
+  &.square {
+    font-size: 1.2rem;
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+}

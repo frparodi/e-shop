@@ -1,20 +1,26 @@
 import React, { useContext } from 'react';
 
 import CartContext from '../../store/cart-context';
-
-import classes from './OrderSummary.module.scss';
+import Button from '../UI/Button/Button';
 import OrderSummaryItem from './OrderSummaryItem';
 
-const OrderSummary = () => {
+import classes from './OrderSummary.module.scss';
+
+const OrderSummary = ({ showEditButton = false, allowEdit = false }) => {
   const ctx = useContext(CartContext);
   return (
     <div className={classes.container}>
+      {showEditButton && ctx.cartItems.length > 0 && (
+        <Button onClick={ctx.openCartModal} customStyles={['text']}>
+          {`<< Edit cart`}
+        </Button>
+      )}
       <h2 className={classes.title}>Order Summary</h2>
       {ctx.cartItems.length > 0 ? (
         <>
-          <ul className={classes['items-list']}>
+          <ul>
             {ctx.cartItems.map((it) => (
-              <OrderSummaryItem key={it.id} item={it} />
+              <OrderSummaryItem key={it.id} item={it} allowEdit={allowEdit} />
             ))}
           </ul>
           <span className={classes.total}>{`Total $${ctx.cartItems.reduce(

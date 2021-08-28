@@ -1,9 +1,12 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useState, useReducer, useCallback } from 'react';
 
 const CartContext = React.createContext({
   cartItems: [],
   addItemToCart: () => {},
   removeItemFromCart: () => {},
+  handleOpenCart: () => {},
+  handleCloseCart: () => {},
+  isCartModalOpen: false,
 });
 
 const setItemAmount = (array, item, operation) => {
@@ -54,7 +57,17 @@ const cartReducer = (state, action) => {
 };
 
 export const CartContextProvider = ({ children }) => {
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+
   const [state, dispatch] = useReducer(cartReducer, { cartItems: [] });
+
+  const handleOpenCart = useCallback(() => {
+    setIsCartModalOpen(true);
+  }, []);
+
+  const handleCloseCart = useCallback(() => {
+    setIsCartModalOpen(false);
+  }, []);
 
   const addItemToCart = useCallback((item) => {
     dispatch({ type: 'ADD_ITEM', item });
@@ -68,6 +81,9 @@ export const CartContextProvider = ({ children }) => {
     cartItems: state.cartItems,
     addItemToCart: addItemToCart,
     removeItemFromCart: removeItemFromCart,
+    openCartModal: handleOpenCart,
+    closeCartModal: handleCloseCart,
+    isCartModalOpen,
   };
 
   return (

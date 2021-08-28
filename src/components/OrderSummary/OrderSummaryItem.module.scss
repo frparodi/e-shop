@@ -3,9 +3,27 @@
 .container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+
+  .block {
+    display: flex;
+    margin-right: 15rem;
+
+    .buttons-container {
+      margin-right: 2rem;
+      display: flex;
+
+      & > :first-child {
+        margin-right: 0.5rem;
+      }
+    }
+  }
 
   .name,
   .price {
+    display: flex;
+    align-items: center;
     font-size: 1.2rem;
   }
 

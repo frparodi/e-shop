@@ -1,0 +1,36 @@
+@import '../../../styles/colors';
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+}
+
+.modal {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  border: 1px solid $black;
+  border-radius: 10px;
+  min-width: 10rem;
+  min-height: 20rem;
+  z-index: 100;
+  animation: show 500ms ease-out;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

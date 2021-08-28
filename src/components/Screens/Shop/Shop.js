@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Navbar from '../../Layout/Navbar/Navbar';
 import Sidebar from '../../Layout/Sidebar/Sidebar';
 import OrderSummary from '../../OrderSummary/OrderSummary';
-
+import OrderSummaryModal from '../../OrderSummary/OrderSummaryModal';
+import CartContext from '../../../store/cart-context';
 import { CATEGORIES, PRODUCTS } from '../../../constants/dummyData';
+
 import ProductSection from './ProductSection';
 
 import classes from './Shop.module.scss';
 
 const Shop = () => {
+  const ctx = useContext(CartContext);
   return (
     <>
       <Navbar />
@@ -33,8 +36,9 @@ const Shop = () => {
           ))}
         </div>
         <Sidebar position="right">
-          <OrderSummary />
+          <OrderSummary showEditButton={true} />
         </Sidebar>
+        {ctx.isCartModalOpen && <OrderSummaryModal />}
       </main>
     </>
   );

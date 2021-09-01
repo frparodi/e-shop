@@ -15,7 +15,7 @@ const OrderSummaryItem = ({ item, allowEdit }) => {
         {allowEdit && (
           <div className={classes['buttons-container']}>
             <Button
-              customStyles={['text']}
+              customStyles={['primary', 'square']}
               onClick={() => {
                 ctx.removeItemFromCart(item);
               }}
@@ -23,7 +23,7 @@ const OrderSummaryItem = ({ item, allowEdit }) => {
               -
             </Button>
             <Button
-              customStyles={['text']}
+              customStyles={['primary', 'square']}
               onClick={() => {
                 ctx.addItemToCart(item);
               }}

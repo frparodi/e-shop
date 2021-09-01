@@ -3,17 +3,10 @@
 .container {
   display: flex;
   flex-direction: column;
-  min-width: 28rem;
-  padding: 2rem;
+  padding: 0 2rem;
 
   & > button {
     align-self: flex-end;
-  }
-
-  .title {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding: 1rem 0 0;
   }
 
   .total {

@@ -6,16 +6,23 @@
   justify-content: center;
   border: 0;
   border-radius: 5px;
-  padding: 0.8em 1em;
+  padding: 0.8em 2em;
   cursor: pointer;
   background-color: inherit;
 
   &.primary {
     background-color: $primary-color;
     color: $white;
+    font-weight: bold;
 
     &:hover {
       background-color: $primary-color-hovered;
+    }
+
+    &:disabled {
+      background-color: $light-gray;
+      color: $gray;
+      cursor: not-allowed;
     }
   }
 
@@ -34,7 +41,16 @@
 
   &.square {
     font-size: 1.2rem;
-    width: 2.8rem;
-    height: 2.8rem;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    padding: 0;
+  }
+
+  &.margin {
+    margin: 2rem;
+  }
+
+  &.center {
+    align-self: center;
   }
 }

@@ -4,8 +4,8 @@ const CartContext = React.createContext({
   cartItems: [],
   addItemToCart: () => {},
   removeItemFromCart: () => {},
-  handleOpenCart: () => {},
-  handleCloseCart: () => {},
+  openCartModal: () => {},
+  closeCartModal: () => {},
   isCartModalOpen: false,
 });
 
@@ -66,6 +66,7 @@ export const CartContextProvider = ({ children }) => {
   }, []);
 
   const handleCloseCart = useCallback(() => {
+    console.log('asoifjasoifj');
     setIsCartModalOpen(false);
   }, []);
 

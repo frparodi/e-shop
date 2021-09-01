@@ -2,7 +2,14 @@ import React from 'react';
 
 import classes from './Button.module.scss';
 
-const Button = ({ type = 'button', onClick, children, customStyles = [] }) => {
+const Button = ({
+  type = 'button',
+  onClick,
+  children,
+  customStyles = [],
+  externalClasses = [],
+  ...props
+}) => {
   const btnClass = `${classes.button} ${
     customStyles.length > 0
       ? customStyles.map((cs) => classes[cs]).join(' ')
@@ -10,7 +17,12 @@ const Button = ({ type = 'button', onClick, children, customStyles = [] }) => {
   }`;
 
   return (
-    <button type={type} onClick={onClick} className={btnClass}>
+    <button
+      type={type}
+      onClick={onClick}
+      className={`${btnClass} ${externalClasses.join(' ')}`}
+      {...props}
+    >
       {children}
     </button>
   );

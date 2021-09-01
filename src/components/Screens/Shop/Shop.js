@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 import Navbar from '../../Layout/Navbar/Navbar';
 import Sidebar from '../../Layout/Sidebar/Sidebar';
+import BasicModal from '../../Layout/Modal/BasicModal';
+import Button from '../../UI/Button/Button';
 import OrderSummary from '../../OrderSummary/OrderSummary';
-import OrderSummaryModal from '../../OrderSummary/OrderSummaryModal';
 import CartContext from '../../../store/cart-context';
 import { CATEGORIES, PRODUCTS } from '../../../constants/dummyData';
 
@@ -12,7 +13,18 @@ import ProductSection from './ProductSection';
 import classes from './Shop.module.scss';
 
 const Shop = () => {
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+
+  const openConfirmationModal = () => {
+    setShowConfirmationModal(true);
+  };
+
+  const closeConfirmationModal = () => {
+    setShowConfirmationModal(false);
+  };
+
   const ctx = useContext(CartContext);
+
   return (
     <>
       <Navbar />
@@ -21,7 +33,7 @@ const Shop = () => {
           <ul className={classes.list}>
             {CATEGORIES.map((cat) => (
               <li key={cat.id} className={classes['list-item']}>
-                {cat.name}
+                <a href={`/#${cat.name}`}>{cat.name}</a>
               </li>
             ))}
           </ul>
@@ -30,16 +42,55 @@ const Shop = () => {
           {CATEGORIES.map((cat) => (
             <ProductSection
               key={cat.id}
+              id={cat.id}
               sectionName={cat.name}
               products={PRODUCTS.filter((p) => p.categoryId === cat.id)}
             />
           ))}
         </div>
         <Sidebar position="right">
+          {ctx.cartItems.length > 0 ? (
+            <Button onClick={ctx.openCartModal} customStyles={['text']}>
+              {`<< Edit cart`}
+            </Button>
+          ) : (
+            ''
+          )}
+          <h2 className={classes['order-summary-title']}>Order Summary</h2>
           <OrderSummary showEditButton={true} />
+          <Button
+            onClick={openConfirmationModal}
+            customStyles={['primary', 'margin']}
+            disabled={ctx.cartItems.length === 0}
+          >
+            Checkout
+          </Button>
         </Sidebar>
-        {ctx.isCartModalOpen && <OrderSummaryModal />}
+        {ctx.isCartModalOpen && (
+          <BasicModal
+            title="Cart items"
+            primaryButtonLabel="OK"
+            primaryButtonHandler={ctx.closeCartModal}
+            handleCloseModal={ctx.closeCartModal}
+          >
+            <OrderSummary allowEdit="true" />
+          </BasicModal>
+        )}
       </main>
+      {showConfirmationModal ? (
+        <BasicModal
+          title="Confirm cart items"
+          primaryButtonLabel="Submit"
+          primaryButtonHandle={null}
+          secondaryButtonLabel="Close"
+          secondaryButtonHandler={closeConfirmationModal}
+          handleCloseModal={closeConfirmationModal}
+        >
+          <p>Do you want to confirm your cart, and go to checkout page?</p>
+        </BasicModal>
+      ) : (
+        ''
+      )}
     </>
   );
 };

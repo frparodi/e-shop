@@ -1,21 +1,15 @@
 import React, { useContext } from 'react';
 
 import CartContext from '../../store/cart-context';
-import Button from '../UI/Button/Button';
+
 import OrderSummaryItem from './OrderSummaryItem';
 
 import classes from './OrderSummary.module.scss';
 
-const OrderSummary = ({ showEditButton = false, allowEdit = false }) => {
+const OrderSummary = ({ allowEdit = false }) => {
   const ctx = useContext(CartContext);
   return (
     <div className={classes.container}>
-      {showEditButton && ctx.cartItems.length > 0 && (
-        <Button onClick={ctx.openCartModal} customStyles={['text']}>
-          {`<< Edit cart`}
-        </Button>
-      )}
-      <h2 className={classes.title}>Order Summary</h2>
       {ctx.cartItems.length > 0 ? (
         <>
           <ul>

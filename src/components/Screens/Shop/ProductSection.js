@@ -5,7 +5,7 @@ import ProductItem from './ProductItem';
 import classes from './ProductSection.module.scss';
 
 const ProductSection = ({ sectionName, products }) => (
-  <div className={classes.container}>
+  <div id={sectionName} className={classes.container}>
     <h3 className={classes.name}>{sectionName}</h3>
     <div className={classes['products-container']}>
       {products.length > 0 ? (

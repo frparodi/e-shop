@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import CartContext from '../../../store/cart-context';
 import Card from '../../UI/Card/Card';
 
 import classes from './ProductItem.module.scss';
@@ -9,14 +9,13 @@ const DESCRIPTION_LENGTH = 100;
 
 const ProductItem = ({ product }) => {
   const { name, price, description } = product;
-
-  const ctx = useContext(CartContext);
+  const dispatch = useDispatch();
 
   return (
     <Card>
       <div
         onClick={() => {
-          ctx.addItemToCart(product);
+          dispatch({ type: 'ADD_ITEM', item: product });
         }}
         className={classes['product-container']}
       >

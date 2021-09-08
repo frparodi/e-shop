@@ -1,23 +1,22 @@
-import React, { useContext } from 'react';
-
-import CartContext from '../../store/cart-context';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import OrderSummaryItem from './OrderSummaryItem';
 
 import classes from './OrderSummary.module.scss';
 
 const OrderSummary = ({ allowEdit = false }) => {
-  const ctx = useContext(CartContext);
+  const cartItems = useSelector((state) => state.cartItems);
   return (
     <div className={classes.container}>
-      {ctx.cartItems.length > 0 ? (
+      {cartItems.length > 0 ? (
         <>
           <ul>
-            {ctx.cartItems.map((it) => (
+            {cartItems.map((it) => (
               <OrderSummaryItem key={it.id} item={it} allowEdit={allowEdit} />
             ))}
           </ul>
-          <span className={classes.total}>{`Total $${ctx.cartItems.reduce(
+          <span className={classes.total}>{`Total $${cartItems.reduce(
             (acc, it) => (acc = acc + it.price * it.amount),
             0
           )}`}</span>

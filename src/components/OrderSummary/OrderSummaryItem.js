@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import Button from '../UI/Button/Button';
-import CartContext from '../../store/cart-context';
 
 import classes from './OrderSummaryItem.module.scss';
 
 const OrderSummaryItem = ({ item, allowEdit }) => {
-  const ctx = useContext(CartContext);
+  const dispatch = useDispatch();
 
   return (
     <li className={classes.container}>
@@ -17,7 +17,7 @@ const OrderSummaryItem = ({ item, allowEdit }) => {
             <Button
               customStyles={['primary', 'square']}
               onClick={() => {
-                ctx.removeItemFromCart(item);
+                dispatch({ type: 'REMOVE_ITEM', item });
               }}
             >
               -
@@ -25,7 +25,7 @@ const OrderSummaryItem = ({ item, allowEdit }) => {
             <Button
               customStyles={['primary', 'square']}
               onClick={() => {
-                ctx.addItemToCart(item);
+                dispatch({ type: 'ADD_ITEM', item });
               }}
             >
               +

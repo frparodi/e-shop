@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router';
+import { useSelector } from 'react-redux';
 
 import Navbar from '../../Layout/Navbar/Navbar';
 import Sidebar from '../../Layout/Sidebar/Sidebar';
@@ -16,6 +17,8 @@ import classes from './Shop.module.scss';
 
 const Shop = (props) => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+
+  const cartItems = useSelector((state) => state.cartItems);
 
   const openConfirmationModal = () => {
     setShowConfirmationModal(true);
@@ -55,7 +58,7 @@ const Shop = (props) => {
           ))}
         </div>
         <Sidebar position="right">
-          {ctx.cartItems.length > 0 ? (
+          {cartItems.length > 0 ? (
             <Button onClick={ctx.openCartModal} customStyles={['text']}>
               {`<< Edit cart`}
             </Button>
@@ -67,7 +70,7 @@ const Shop = (props) => {
           <Button
             onClick={openConfirmationModal}
             customStyles={['primary', 'margin']}
-            disabled={ctx.cartItems.length === 0}
+            disabled={cartItems.length === 0}
           >
             Checkout
           </Button>

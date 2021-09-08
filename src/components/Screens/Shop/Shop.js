@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router';
 import { useSelector } from 'react-redux';
 
@@ -7,32 +7,27 @@ import Sidebar from '../../Layout/Sidebar/Sidebar';
 import BasicModal from '../../Layout/Modal/BasicModal';
 import Button from '../../UI/Button/Button';
 import OrderSummary from '../../OrderSummary/OrderSummary';
-import CartContext from '../../../store/cart-context';
+import useModal from '../../hooks/use-modal';
+
 import { CATEGORIES, PRODUCTS } from '../../../constants/dummyData';
 import { CHECKOUT } from '../../../constants/routes';
 
 import ProductSection from './ProductSection';
-
 import classes from './Shop.module.scss';
 
 const Shop = (props) => {
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-
   const cartItems = useSelector((state) => state.cartItems);
-
-  const openConfirmationModal = () => {
-    setShowConfirmationModal(true);
-  };
-
-  const closeConfirmationModal = () => {
-    setShowConfirmationModal(false);
-  };
 
   const handleConfirmCart = () => {
     props.history.push(CHECKOUT);
   };
 
-  const ctx = useContext(CartContext);
+  const [isCartModalOpen, openCartModal, closeCartModal] = useModal();
+  const [
+    isConfirmationModalOpen,
+    openConfirmationModal,
+    closeConfirmationModal,
+  ] = useModal();
 
   return (
     <>
@@ -59,7 +54,7 @@ const Shop = (props) => {
         </div>
         <Sidebar position="right">
           {cartItems.length > 0 ? (
-            <Button onClick={ctx.openCartModal} customStyles={['text']}>
+            <Button onClick={openCartModal} customStyles={['text']}>
               {`<< Edit cart`}
             </Button>
           ) : (
@@ -75,18 +70,18 @@ const Shop = (props) => {
             Checkout
           </Button>
         </Sidebar>
-        {ctx.isCartModalOpen && (
+        {isCartModalOpen && (
           <BasicModal
             title="Cart items"
             primaryButtonLabel="OK"
-            primaryButtonHandler={ctx.closeCartModal}
-            handleCloseModal={ctx.closeCartModal}
+            primaryButtonHandler={closeCartModal}
+            handleCloseModal={closeCartModal}
           >
             <OrderSummary allowEdit="true" />
           </BasicModal>
         )}
       </main>
-      {showConfirmationModal ? (
+      {isConfirmationModalOpen ? (
         <BasicModal
           title="Confirm cart items"
           primaryButtonLabel="Submit"

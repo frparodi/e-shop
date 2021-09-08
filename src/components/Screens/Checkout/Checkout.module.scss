@@ -1,0 +1,10 @@
+@import '../../../styles/colors.scss';
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  padding: 12rem 10% 0;
+  background-color: $almost-white;
+  min-height: 100vh;
+  justify-content: space-around;
+}

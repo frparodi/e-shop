@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { withRouter } from 'react-router';
 
 import Navbar from '../../Layout/Navbar/Navbar';
 import Sidebar from '../../Layout/Sidebar/Sidebar';
@@ -7,12 +8,13 @@ import Button from '../../UI/Button/Button';
 import OrderSummary from '../../OrderSummary/OrderSummary';
 import CartContext from '../../../store/cart-context';
 import { CATEGORIES, PRODUCTS } from '../../../constants/dummyData';
+import { CHECKOUT } from '../../../constants/routes';
 
 import ProductSection from './ProductSection';
 
 import classes from './Shop.module.scss';
 
-const Shop = () => {
+const Shop = (props) => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const openConfirmationModal = () => {
@@ -21,6 +23,10 @@ const Shop = () => {
 
   const closeConfirmationModal = () => {
     setShowConfirmationModal(false);
+  };
+
+  const handleConfirmCart = () => {
+    props.history.push(CHECKOUT);
   };
 
   const ctx = useContext(CartContext);
@@ -81,7 +87,7 @@ const Shop = () => {
         <BasicModal
           title="Confirm cart items"
           primaryButtonLabel="Submit"
-          primaryButtonHandle={null}
+          primaryButtonHandler={handleConfirmCart}
           secondaryButtonLabel="Close"
           secondaryButtonHandler={closeConfirmationModal}
           handleCloseModal={closeConfirmationModal}
@@ -95,4 +101,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default withRouter(Shop);

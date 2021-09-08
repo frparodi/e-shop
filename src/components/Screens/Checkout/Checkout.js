@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 
-import Navbar from '../../Layout/Navbar/Navbar';
 import Button from '../../UI/Button/Button';
 import Card from '../../UI/Card/Card';
 import OrderSummary from '../../OrderSummary/OrderSummary';
@@ -15,21 +14,18 @@ const Checkout = (props) => {
   };
 
   return (
-    <>
-      <Navbar />
-      <main className={classes.container}>
-        <Button
-          customStyles={['text']}
-          onClick={handleGoBackButton}
-        >{`< Go back`}</Button>
-        <Card>
-          <CheckoutForm />
-        </Card>
-        <Card>
-          <OrderSummary />
-        </Card>
-      </main>
-    </>
+    <main className={classes.container}>
+      <Button
+        customStyles={['text']}
+        onClick={handleGoBackButton}
+      >{`< Go back`}</Button>
+      <Card>
+        <CheckoutForm />
+      </Card>
+      <Card>
+        <OrderSummary />
+      </Card>
+    </main>
   );
 };
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { useSelector } from 'react-redux';
 
-import Navbar from '../../Layout/Navbar/Navbar';
 import Sidebar from '../../Layout/Sidebar/Sidebar';
 import BasicModal from '../../Layout/Modal/BasicModal';
 import Button from '../../UI/Button/Button';
@@ -30,58 +29,55 @@ const Shop = (props) => {
   ] = useModal();
 
   return (
-    <>
-      <Navbar />
-      <main className={classes.container}>
-        <Sidebar>
-          <ul className={classes.list}>
-            {CATEGORIES.map((cat) => (
-              <li key={cat.id} className={classes['list-item']}>
-                <a href={`/#${cat.name}`}>{cat.name}</a>
-              </li>
-            ))}
-          </ul>
-        </Sidebar>
-        <div className={classes['product-catalog']}>
+    <main className={classes.container}>
+      <Sidebar>
+        <ul className={classes.list}>
           {CATEGORIES.map((cat) => (
-            <ProductSection
-              key={cat.id}
-              id={cat.id}
-              sectionName={cat.name}
-              products={PRODUCTS.filter((p) => p.categoryId === cat.id)}
-            />
+            <li key={cat.id} className={classes['list-item']}>
+              <a href={`/#${cat.name}`}>{cat.name}</a>
+            </li>
           ))}
-        </div>
-        <Sidebar position="right">
-          {cartItems.length > 0 ? (
-            <Button onClick={openCartModal} customStyles={['text']}>
-              {`<< Edit cart`}
-            </Button>
-          ) : (
-            ''
-          )}
-          <h2 className={classes['order-summary-title']}>Order Summary</h2>
-          <OrderSummary showEditButton={true} />
-          <Button
-            onClick={openConfirmationModal}
-            customStyles={['primary', 'margin']}
-            disabled={cartItems.length === 0}
-          >
-            Checkout
+        </ul>
+      </Sidebar>
+      <div className={classes['product-catalog']}>
+        {CATEGORIES.map((cat) => (
+          <ProductSection
+            key={cat.id}
+            id={cat.id}
+            sectionName={cat.name}
+            products={PRODUCTS.filter((p) => p.categoryId === cat.id)}
+          />
+        ))}
+      </div>
+      <Sidebar position="right">
+        {cartItems.length > 0 ? (
+          <Button onClick={openCartModal} customStyles={['text']}>
+            {`<< Edit cart`}
           </Button>
-        </Sidebar>
-        {isCartModalOpen && (
-          <BasicModal
-            title="Cart items"
-            primaryButtonLabel="OK"
-            primaryButtonHandler={closeCartModal}
-            handleCloseModal={closeCartModal}
-          >
-            <OrderSummary allowEdit="true" />
-          </BasicModal>
+        ) : (
+          ''
         )}
-      </main>
-      {isConfirmationModalOpen ? (
+        <h2 className={classes['order-summary-title']}>Order Summary</h2>
+        <OrderSummary showEditButton={true} />
+        <Button
+          onClick={openConfirmationModal}
+          customStyles={['primary', 'margin']}
+          disabled={cartItems.length === 0}
+        >
+          Checkout
+        </Button>
+      </Sidebar>
+      {isCartModalOpen && (
+        <BasicModal
+          title="Cart items"
+          primaryButtonLabel="OK"
+          primaryButtonHandler={closeCartModal}
+          handleCloseModal={closeCartModal}
+        >
+          <OrderSummary allowEdit="true" />
+        </BasicModal>
+      )}
+      {isConfirmationModalOpen && (
         <BasicModal
           title="Confirm cart items"
           primaryButtonLabel="Submit"
@@ -92,10 +88,8 @@ const Shop = (props) => {
         >
           <p>Do you want to confirm your cart, and go to checkout page?</p>
         </BasicModal>
-      ) : (
-        ''
       )}
-    </>
+    </main>
   );
 };
 

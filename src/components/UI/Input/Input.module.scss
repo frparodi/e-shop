@@ -1,0 +1,23 @@
+@import '../../../styles/colors';
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .label,
+  .input {
+    color: $primary-color;
+  }
+
+  .label {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .input {
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid $primary-color;
+  }
+}

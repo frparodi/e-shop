@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
+import { cartActions } from '../../store/store';
 import Button from '../UI/Button/Button';
 
 import classes from './OrderSummaryItem.module.scss';
@@ -17,7 +18,7 @@ const OrderSummaryItem = ({ item, allowEdit }) => {
             <Button
               customStyles={['primary', 'square']}
               onClick={() => {
-                dispatch({ type: 'REMOVE_ITEM', item });
+                dispatch(cartActions.removeItem(item));
               }}
             >
               -
@@ -25,7 +26,7 @@ const OrderSummaryItem = ({ item, allowEdit }) => {
             <Button
               customStyles={['primary', 'square']}
               onClick={() => {
-                dispatch({ type: 'ADD_ITEM', item });
+                dispatch(cartActions.addItem(item));
               }}
             >
               +

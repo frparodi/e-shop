@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
+import { cartActions } from '../../../store/store';
 import Card from '../../UI/Card/Card';
 
 import classes from './ProductItem.module.scss';
@@ -15,7 +16,7 @@ const ProductItem = ({ product }) => {
     <Card>
       <div
         onClick={() => {
-          dispatch({ type: 'ADD_ITEM', item: product });
+          dispatch(cartActions.addItem(product));
         }}
         className={classes['product-container']}
       >

@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { createSlice, configureStore } from '@reduxjs/toolkit';
 
 import { setItemAmount } from '../utils/cartUtils';
 
@@ -6,23 +6,25 @@ const initialState = {
   cartItems: [],
 };
 
-const cartReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'ADD_ITEM':
-      return {
-        ...state,
-        cartItems: setItemAmount(state.cartItems, action.item, 'ADD'),
-      };
-    case 'REMOVE_ITEM':
-      return {
-        ...state,
-        cartItems: setItemAmount(state.cartItems, action.item, 'REMOVE'),
-      };
-    default:
-      return state;
-  }
-};
+const cartSlice = createSlice({
+  name: 'cartSlice',
+  initialState,
+  reducers: {
+    addItem(state, action) {
+      state.cartItems = setItemAmount(state.cartItems, action.payload, 'ADD');
+    },
+    removeItem(state, action) {
+      state.cartItems = setItemAmount(
+        state.cartItems,
+        action.payload,
+        'REMOVE'
+      );
+    },
+  },
+});
 
-const store = createStore(cartReducer);
+const store = configureStore({ reducer: cartSlice.reducer });
+
+export const cartActions = cartSlice.actions;
 
 export default store;

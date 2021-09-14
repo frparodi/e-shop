@@ -15,7 +15,7 @@ import ProductSection from './ProductSection';
 import classes from './Shop.module.scss';
 
 const Shop = (props) => {
-  const cartItems = useSelector((state) => state.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   const handleConfirmCart = () => {
     props.history.push(CHECKOUT);

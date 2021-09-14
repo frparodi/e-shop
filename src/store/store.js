@@ -1,30 +1,13 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 
-import { setItemAmount } from '../utils/cartUtils';
+import cartReducer from './slices/cartSlice';
+import authReducer from './slices/authSlice';
 
-const initialState = {
-  cartItems: [],
-};
-
-const cartSlice = createSlice({
-  name: 'cartSlice',
-  initialState,
-  reducers: {
-    addItem(state, action) {
-      state.cartItems = setItemAmount(state.cartItems, action.payload, 'ADD');
-    },
-    removeItem(state, action) {
-      state.cartItems = setItemAmount(
-        state.cartItems,
-        action.payload,
-        'REMOVE'
-      );
-    },
+const store = configureStore({
+  reducer: {
+    cart: cartReducer,
+    auth: authReducer,
   },
 });
-
-const store = configureStore({ reducer: cartSlice.reducer });
-
-export const cartActions = cartSlice.actions;
 
 export default store;

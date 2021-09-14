@@ -6,7 +6,7 @@ import OrderSummaryItem from './OrderSummaryItem';
 import classes from './OrderSummary.module.scss';
 
 const OrderSummary = ({ allowEdit = false }) => {
-  const cartItems = useSelector((state) => state.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   return (
     <div className={classes.container}>
       {cartItems.length > 0 ? (

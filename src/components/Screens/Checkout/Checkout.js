@@ -15,14 +15,14 @@ const Checkout = (props) => {
 
   return (
     <main className={classes.container}>
-      <Button
-        customStyles={['text']}
-        onClick={handleGoBackButton}
-      >{`< Go back`}</Button>
-      <Card>
+      <Card customStyles={['padding-h1', 'padding-v2']}>
+        <Button
+          customStyles={['text']}
+          onClick={handleGoBackButton}
+        >{`< Go back`}</Button>
         <CheckoutForm />
       </Card>
-      <Card>
+      <Card customStyles={['padding-h1', 'padding-v2', 'min-300']}>
         <OrderSummary />
       </Card>
     </main>

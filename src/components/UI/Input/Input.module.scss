@@ -3,6 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
 
   .label,
   .input {
@@ -19,5 +20,33 @@
     padding: 1rem;
     border-radius: 6px;
     border: 1px solid $primary-color;
+    margin-bottom: 0.2rem;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    &[type='number'] {
+      -moz-appearance: textfield;
+    }
+  }
+
+  &.error {
+    input {
+      border: 1px solid $red;
+    }
+  }
+
+  .error-container {
+    height: 2rem;
+		
+    .error {
+      color: $red;
+      margin: 0;
+      font-size: 1.2rem;
+    }
   }
 }

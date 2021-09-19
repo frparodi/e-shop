@@ -2,9 +2,30 @@
 
 .container {
   display: flex;
-  align-items: flex-start;
-  padding: 5rem 10% 0;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
   background-color: $almost-white;
   min-height: 100vh;
-  justify-content: space-between;
+  padding: 2rem;
+
+  & > :nth-child(1) {
+    margin-top: 5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 5rem 15% 0;
+
+    & > :nth-child(1) {
+      margin: 0 5% 0 0;
+      flex: 2;
+    }
+
+    & > :nth-child(2) {
+      flex: 1;
+    }
+  }
 }

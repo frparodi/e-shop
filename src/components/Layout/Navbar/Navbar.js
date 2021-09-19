@@ -9,9 +9,9 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  const login = () => {
-    dispatch(authActions.login());
-  };
+  // const login = () => {
+  //   dispatch(authActions.login());
+  // };
 
   const logout = () => {
     dispatch(authActions.logout());
@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <nav className={classes.navbar}>
       <h1>React e-shop</h1>
-      {!isAuthenticated && <button onClick={login}>Login</button>}
+      {/*!isAuthenticated && <button onClick={login}>Login</button>*/}
       {isAuthenticated && <button onClick={logout}>Logout</button>}
     </nav>
   );

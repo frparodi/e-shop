@@ -2,9 +2,7 @@ import React from 'react';
 
 import classes from './Input.module.scss';
 
-const Input = (props) => {
-  const { label, id, error, errorMessage } = props;
-
+const Input = ({ label, id, error, errorMessage, ...props }) => {
   const style = !error
     ? classes.container
     : `${classes.container} ${classes.error}`;
@@ -16,7 +14,7 @@ const Input = (props) => {
           {label}
         </label>
       ) : null}
-      <input {...props} id={id} className={classes.input} />
+      <input id={id} className={classes.input} {...props} />
       <div className={classes['error-container']}>
         {error && (
           <p className={classes.error}>

@@ -1,4 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { contactActions } from '../../../store/slices/contactSlice';
 
 import useInput from '../../hooks/use-input';
 
@@ -12,14 +15,22 @@ const validateName = (value) => value.trim().length > 3;
 const validateAddress = (value) => value.trim().length > 5;
 const validatePhone = (value) => value.trim().length >= 10;
 
+let initial = true;
+
 const CheckoutForm = () => {
+  const {
+    name: contactName,
+    phone: contactPhone,
+    address: contactAddress,
+  } = useSelector((state) => state.contact);
+
   const {
     value: name,
     isValid: nameIsValid,
     hasError: nameError,
     valueChangeHandler: handleNameChange,
     inputBlurHandler: nameBlurHandler,
-  } = useInput(validateName);
+  } = useInput(validateName, contactName);
 
   const {
     value: address,
@@ -27,7 +38,7 @@ const CheckoutForm = () => {
     hasError: addressError,
     valueChangeHandler: handleAddressChange,
     inputBlurHandler: addressBlurHandler,
-  } = useInput(validateAddress);
+  } = useInput(validateAddress, contactAddress);
 
   const {
     value: phone,
@@ -35,7 +46,17 @@ const CheckoutForm = () => {
     hasError: phoneError,
     valueChangeHandler: handlePhoneChange,
     inputBlurHandler: phoneBlurHandler,
-  } = useInput(validatePhone);
+  } = useInput(validatePhone, contactPhone);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!initial) {
+      dispatch(contactActions.setFields({ name, address, phone }));
+    } else {
+      initial = false;
+    }
+  }, [name, address, phone]);
 
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 

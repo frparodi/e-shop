@@ -1,13 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { contactActions } from '../../../store/slices/contactSlice';
 
 import useInput from '../../hooks/use-input';
 
-import BasicModal from '../../Layout/Modal/BasicModal';
 import Input from '../../UI/Input/Input';
-import Button from '../../UI/Button/Button';
 
 import classes from './CheckoutForm.module.scss';
 
@@ -17,7 +15,7 @@ const validatePhone = (value) => value.trim().length >= 10;
 
 let initial = true;
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ handleFormValidity }) => {
   const {
     name: contactName,
     phone: contactPhone,
@@ -58,68 +56,39 @@ const CheckoutForm = () => {
     }
   }, [name, address, phone]);
 
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-
-  const closeConfirmationModal = useCallback(() => {
-    setShowConfirmationModal(false);
-  }, []);
-
-  const openConfirmationModal = useCallback(() => {
-    setShowConfirmationModal(true);
-  }, []);
-
-  const formIsValid = nameIsValid && phoneIsValid && addressIsValid;
+  useEffect(() => {
+    handleFormValidity(nameIsValid && phoneIsValid && addressIsValid);
+  }, [nameIsValid, phoneIsValid, addressIsValid]);
 
   return (
-    <>
-      <form className={classes.form}>
-        <h2 className={classes['form-title']}>Contact form</h2>
-        <Input
-          id="name"
-          label="Name"
-          onChange={handleNameChange}
-          value={name}
-          error={nameError}
-          onBlur={nameBlurHandler}
-        />
-        <Input
-          id="phone"
-          type="number"
-          label="Phone"
-          onChange={handlePhoneChange}
-          value={phone}
-          error={phoneError}
-          onBlur={phoneBlurHandler}
-        />
-        <Input
-          id="address"
-          label="Address"
-          onChange={handleAddressChange}
-          value={address}
-          error={addressError}
-          onBlur={addressBlurHandler}
-        />
-        <Button
-          customStyles={['primary', 'right']}
-          onClick={openConfirmationModal}
-          disabled={!formIsValid}
-        >
-          Submit
-        </Button>
-      </form>
-      {showConfirmationModal && (
-        <BasicModal
-          title="Confirm purchase"
-          primaryButtonLabel="Confirm"
-          primaryButtonHandle={null}
-          secondaryButtonLabel="Go back"
-          secondaryButtonHandler={closeConfirmationModal}
-          handleCloseModal={closeConfirmationModal}
-        >
-          <p>Do you want to confirm your purchase?</p>
-        </BasicModal>
-      )}
-    </>
+    <form className={classes.form}>
+      <h2 className={classes['form-title']}>Contact form</h2>
+      <Input
+        id="name"
+        label="Name"
+        onChange={handleNameChange}
+        value={name}
+        error={nameError}
+        onBlur={nameBlurHandler}
+      />
+      <Input
+        id="phone"
+        type="number"
+        label="Phone"
+        onChange={handlePhoneChange}
+        value={phone}
+        error={phoneError}
+        onBlur={phoneBlurHandler}
+      />
+      <Input
+        id="address"
+        label="Address"
+        onChange={handleAddressChange}
+        value={address}
+        error={addressError}
+        onBlur={addressBlurHandler}
+      />
+    </form>
   );
 };
 

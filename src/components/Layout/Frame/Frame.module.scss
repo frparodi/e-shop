@@ -1,9 +1,27 @@
 @import '../../../styles/colors.scss';
 
-.container {
-  padding-top: 6rem;
+.frame {
+  & > :nth-child(1) {
+    display: none;
+  }
+}
+
+.main {
   display: flex;
   flex-direction: column;
   background-color: $almost-white;
-  min-height: calc(100vh-6rem);
+  min-height: 100vh;
+}
+
+@media (min-width: 1200px) {
+  .main {
+    padding-top: 6rem;
+    min-height: calc(100vh - 6rem);
+  }
+
+  .frame {
+    & > :nth-child(1) {
+      display: flex;
+    }
+  }
 }

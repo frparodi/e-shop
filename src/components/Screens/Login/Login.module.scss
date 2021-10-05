@@ -1,0 +1,8 @@
+@import '../../../styles/colors.scss';
+
+.background {
+  min-height: 100vh;
+  background-color: $almost-white;
+  display: flex;
+  justify-content: center;
+}

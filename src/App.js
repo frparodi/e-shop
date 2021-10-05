@@ -1,28 +1,43 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Frame from './components/Layout/Frame/Frame';
+import Login from './components/Screens/Login/Login';
+import Products from './components/Screens/Products/Products';
 import Checkout from './components/Screens/Checkout/Checkout';
 import Shop from './components/Screens/Shop/Shop';
-import { SHOP, CHECKOUT } from './constants/routes';
+
+import { authActions } from './store/slices/authSlice';
+
+import { ADMIN, PRODUCTS, SHOP, CHECKOUT } from './constants/routes';
 
 function App() {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const cartIsEmpty = useSelector((state) => state.cart.cartItems.length === 0);
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem('token');
+    dispatch(authActions.saveToken(savedToken));
+  }, []);
+
   return (
     <Switch>
+      <Route path={ADMIN}>
+        {isAuthenticated ? <Redirect to={PRODUCTS} /> : <Login />}
+      </Route>
+      <Route path={PRODUCTS}>
+        {isAuthenticated ? <Products /> : <Redirect to={ADMIN} />}
+      </Route>
       <Route path={SHOP}>
-        <Frame>
-          <Shop />
-        </Frame>
+        <Shop />
       </Route>
       <Route path={CHECKOUT}>
-        <Frame>
-          <Checkout />
-        </Frame>
+        {cartIsEmpty ? <Redirect to={SHOP} /> : <Checkout />}
+        <Checkout />
       </Route>
       <Route exact path="/">
-        <Frame>
-          <Shop />
-        </Frame>
+        {isAuthenticated ? <Redirect to={PRODUCTS} /> : <Redirect to={SHOP} />}
       </Route>
     </Switch>
   );

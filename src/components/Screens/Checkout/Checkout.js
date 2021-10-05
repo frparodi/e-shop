@@ -5,6 +5,7 @@ import BasicModal from '../../Layout/Modal/BasicModal';
 
 import useModal from '../../hooks/use-modal';
 
+import Frame from '../../Layout/Frame/Frame';
 import Button from '../../UI/Button/Button';
 import Card from '../../UI/Card/Card';
 import OrderSummary from '../../OrderSummary/OrderSummary';
@@ -27,42 +28,44 @@ const Checkout = (props) => {
   };
 
   return (
-    <main className={classes.container}>
-      <Button
-        customStyles={['text']}
-        onClick={handleGoBackButton}
-      >{`< Go back`}</Button>
-      <div className={classes['cards-container']}>
-        <div className={classes['form-container']}>
-          <Card customStyles={['padding-h1', 'padding-v2']}>
-            <CheckoutForm handleFormValidity={handleFormValidity} />
+    <Frame>
+      <main className={classes.container}>
+        <Button
+          customStyles={['text']}
+          onClick={handleGoBackButton}
+        >{`< Go back`}</Button>
+        <div className={classes['cards-container']}>
+          <div className={classes['form-container']}>
+            <Card customStyles={['padding-h1', 'padding-v2']}>
+              <CheckoutForm handleFormValidity={handleFormValidity} />
+            </Card>
+            <Button
+              customStyles={['primary', 'right']}
+              onClick={openConfirmationModal}
+              disabled={!formIsValid}
+            >
+              Submit
+            </Button>
+          </div>
+          <Card customStyles={['padding-h1', 'padding-v2', 'min-300']}>
+            <OrderSummary />
           </Card>
-          <Button
-            customStyles={['primary', 'right']}
-            onClick={openConfirmationModal}
-            disabled={!formIsValid}
-          >
-            Submit
-          </Button>
         </div>
-        <Card customStyles={['padding-h1', 'padding-v2', 'min-300']}>
-          <OrderSummary />
-        </Card>
-      </div>
 
-      {showConfirmationModal && (
-        <BasicModal
-          title="Confirm purchase"
-          primaryButtonLabel="Confirm"
-          primaryButtonHandle={null}
-          secondaryButtonLabel="Go back"
-          secondaryButtonHandler={closeConfirmationModal}
-          handleCloseModal={closeConfirmationModal}
-        >
-          <p>Do you want to confirm your purchase?</p>
-        </BasicModal>
-      )}
-    </main>
+        {showConfirmationModal && (
+          <BasicModal
+            title="Confirm purchase"
+            primaryButtonLabel="Confirm"
+            primaryButtonHandle={null}
+            secondaryButtonLabel="Go back"
+            secondaryButtonHandler={closeConfirmationModal}
+            handleCloseModal={closeConfirmationModal}
+          >
+            <p>Do you want to confirm your purchase?</p>
+          </BasicModal>
+        )}
+      </main>
+    </Frame>
   );
 };
 

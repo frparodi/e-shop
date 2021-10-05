@@ -39,6 +39,10 @@
     font-size: 1.4rem;
   }
 
+  &.white {
+    color: $white;
+  }
+
   &.square {
     font-size: 1.2rem;
     min-width: 2.5rem;

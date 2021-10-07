@@ -1,11 +1,12 @@
 @import '../../../styles/colors.scss';
+@import '../../../styles/sizes.scss';
 
 .container {
   display: flex;
   flex-direction: column;
 
   & > :nth-child(1) {
-    display: none;
+    display: flex;
   }
 
   & > :nth-child(2) {
@@ -19,47 +20,36 @@
   .product-catalog {
     display: flex;
     flex-direction: column;
-    padding: 2rem 0;
+    padding: 6rem 0 0;
     height: calc(100vh - 6rem);
     overflow: auto;
   }
 
   .order-summary-title {
-    padding-top: 1rem;
+    padding: 1rem 0;
     text-align: center;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: $desktop-min) {
   .container {
     flex-direction: row;
 
     & > :nth-child(1) {
-      display: flex;
-      flex-basis: 15%;
+      flex: 1;
     }
 
     & > :nth-child(2) {
-      flex-basis: 65%;
+      flex: 8;
     }
 
     & > :nth-child(3) {
       display: flex;
-      flex-basis: 20%;
-    }
-
-    .list {
-      padding: 2rem 3rem;
-
-      .list-item {
-        color: $primary-color;
-        font-size: 1.4rem;
-        padding: 1rem 0;
-      }
+      flex: 3;
     }
 
     .product-catalog {
-      padding: 4rem;
+      padding: 2rem;
     }
   }
 }

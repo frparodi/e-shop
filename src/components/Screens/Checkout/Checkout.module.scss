@@ -1,14 +1,16 @@
 @import '../../../styles/colors.scss';
+@import '../../../styles/sizes.scss';
 
 .container {
   display: flex;
   flex-direction: column;
   background-color: $almost-white;
   min-height: 100vh;
-  padding: 2%;
+  padding: 1rem 3rem;
 
   & > :nth-child(1) {
-    padding: 3rem 0;
+    padding: 2rem 0;
+    align-self: flex-start;
   }
 
   .cards-container {
@@ -28,7 +30,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: $desktop-min) {
   .container {
     min-height: calc(100vh - 6rem);
     flex-direction: column;

@@ -12,7 +12,6 @@ const OrderSummaryItem = ({ item, allowEdit }) => {
   return (
     <li className={classes.container}>
       <div className={classes.block}>
-        <span className={classes.name}>{`${item.amount} x ${item.name}`}</span>
         {allowEdit && (
           <div className={classes['buttons-container']}>
             <Button
@@ -33,6 +32,7 @@ const OrderSummaryItem = ({ item, allowEdit }) => {
             </Button>
           </div>
         )}
+        <span className={classes.name}>{`${item.amount} x ${item.name}`}</span>
       </div>
       <span className={classes.price}>{`$${item.price * item.amount}`}</span>
     </li>

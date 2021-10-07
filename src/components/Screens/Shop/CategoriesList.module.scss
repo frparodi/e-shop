@@ -1,0 +1,45 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/sizes.scss';
+
+.list {
+  position: fixed;
+  display: flex;
+  padding: 1rem 0;
+  background-color: $white;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  box-shadow: 0 -14px 10px 8px $primary-color;
+  overflow-x: auto;
+
+  .list-item {
+    color: $primary-color;
+    font-size: 1.1rem;
+    padding: 0.6rem 2rem;
+    white-space: nowrap;
+    border: 1px solid $primary-color;
+    border-radius: 20px;
+    background-color: $primary-color;
+    color: $white;
+    margin: 0 1rem;
+    font-weight: bold;
+  }
+}
+
+@media (min-width: $desktop-min) {
+  .list {
+    position: relative;
+    flex-direction: column;
+    padding: 2rem 3rem;
+    box-shadow: -5px 0 7px 3px $primary-color;
+
+    .list-item {
+      background-color: inherit;
+      color: $primary-color;
+      font-size: 1.4rem;
+      font-weight: normal;
+      padding: 1rem 0;
+      border: 0;
+    }
+  }
+}

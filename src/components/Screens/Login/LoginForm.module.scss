@@ -1,4 +1,5 @@
 @import '../../../styles/colors.scss';
+@import '../../../styles/sizes.scss';
 
 .form {
   background-color: $white;
@@ -22,7 +23,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: $desktop-min) {
   .form {
     align-self: center;
     border: 1px solid $primary-color;

@@ -34,7 +34,6 @@ function App() {
       </Route>
       <Route path={CHECKOUT}>
         {cartIsEmpty ? <Redirect to={SHOP} /> : <Checkout />}
-        <Checkout />
       </Route>
       <Route exact path="/">
         {isAuthenticated ? <Redirect to={PRODUCTS} /> : <Redirect to={SHOP} />}

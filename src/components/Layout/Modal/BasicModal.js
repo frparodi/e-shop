@@ -32,7 +32,11 @@ const BasicModal = (props) => {
           ) : (
             ''
           )}
-          <Button onClick={primaryButtonHandler} customStyles={['primary']}>
+          <Button
+            disabled={!primaryButtonHandler}
+            onClick={primaryButtonHandler}
+            customStyles={['primary']}
+          >
             {primaryButtonLabel}
           </Button>
         </div>

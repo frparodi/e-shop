@@ -30,13 +30,12 @@ const Checkout = (props) => {
   return (
     <Frame>
       <main className={classes.container}>
-        <Button
-          customStyles={['text']}
-          onClick={handleGoBackButton}
-        >{`< Go back`}</Button>
+        <Button customStyles={['text']} onClick={handleGoBackButton}>
+          {`< Go back`}
+        </Button>
         <div className={classes['cards-container']}>
           <div className={classes['form-container']}>
-            <Card customStyles={['padding-h1', 'padding-v2']}>
+            <Card customStyles={['padding-h1', 'padding-v1']}>
               <CheckoutForm handleFormValidity={handleFormValidity} />
             </Card>
             <Button
@@ -47,7 +46,7 @@ const Checkout = (props) => {
               Submit
             </Button>
           </div>
-          <Card customStyles={['padding-h1', 'padding-v2', 'min-300']}>
+          <Card customStyles={['padding-h1', 'padding-v1', 'min-300']}>
             <OrderSummary />
           </Card>
         </div>

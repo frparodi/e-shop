@@ -1,22 +1,31 @@
+@import '../../../styles/sizes';
+
 .container {
   display: flex;
   flex-direction: column;
-  padding: 0 2rem;
+  padding: 2rem;
+  min-width: 90vw;
 
   .title {
     text-align: center;
     font-size: 1.6rem;
-    padding: 2rem 0 1rem;
+    margin-bottom: 2rem;
   }
 
   .buttons-row {
     display: flex;
     justify-content: flex-end;
-    margin-top: 2rem;
-    padding: 1rem 0;
+    margin-top: 3rem;
 
     & > :first-child {
       margin-right: 1rem;
     }
+  }
+}
+
+@media (min-width: $desktop-min) {
+  .container {
+    min-width: 40rem;
+    padding: 2rem;
   }
 }

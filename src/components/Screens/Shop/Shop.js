@@ -6,6 +6,7 @@ import Frame from '../../Layout/Frame/Frame';
 import Sidebar from '../../Layout/Sidebar/Sidebar';
 import BasicModal from '../../Layout/Modal/BasicModal';
 import Button from '../../UI/Button/Button';
+import Fab from '../../UI/Fab/Fab';
 import OrderSummary from '../../OrderSummary/OrderSummary';
 import useModal from '../../hooks/use-modal';
 
@@ -13,34 +14,30 @@ import { CATEGORIES, PRODUCTS } from '../../../constants/dummyData';
 import { CHECKOUT } from '../../../constants/routes';
 
 import ProductSection from './ProductSection';
+import ShowCartMobileButton from './ShowCartMobileButton';
+
 import classes from './Shop.module.scss';
+import {
+  getCartSummarizedData,
+  formatToCurrency,
+} from '../../../utils/cartUtils';
+import CategoriesList from './CategoriesList';
 
 const Shop = (props) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const [isCartModalOpen, openCartModal, closeCartModal] = useModal();
+
+  const [cartSize, cartCost] = getCartSummarizedData(cartItems);
 
   const handleConfirmCart = () => {
     props.history.push(CHECKOUT);
   };
 
-  const [isCartModalOpen, openCartModal, closeCartModal] = useModal();
-  const [
-    isConfirmationModalOpen,
-    openConfirmationModal,
-    closeConfirmationModal,
-  ] = useModal();
-
   return (
     <Frame>
       <main className={classes.container}>
-        <Sidebar>
-          <ul className={classes.list}>
-            {CATEGORIES.map((cat) => (
-              <li key={cat.id} className={classes['list-item']}>
-                <a href={`/#${cat.name}`}>{cat.name}</a>
-              </li>
-            ))}
-          </ul>
-        </Sidebar>
+        <CategoriesList />
         <div className={classes['product-catalog']}>
           {CATEGORIES.map((cat) => (
             <ProductSection
@@ -51,44 +48,38 @@ const Shop = (props) => {
             />
           ))}
         </div>
-        <Sidebar position="right">
-          {cartItems.length > 0 ? (
-            <Button onClick={openCartModal} customStyles={['text']}>
-              {`<< Edit cart`}
-            </Button>
-          ) : (
-            ''
-          )}
+        <Sidebar>
           <h2 className={classes['order-summary-title']}>Order Summary</h2>
-          <OrderSummary showEditButton={true} />
+          <OrderSummary />
           <Button
-            onClick={openConfirmationModal}
-            customStyles={['primary', 'margin']}
+            onClick={openCartModal}
+            customStyles={['primary', 'margin-top']}
             disabled={cartItems.length === 0}
           >
             Checkout
           </Button>
         </Sidebar>
+        {cartItems.length > 0 && (
+          <Fab onClick={openCartModal}>
+            <ShowCartMobileButton
+              cartSize={cartSize}
+              cartCost={formatToCurrency(cartCost)}
+            />
+          </Fab>
+        )}
+
         {isCartModalOpen && (
           <BasicModal
             title="Cart items"
-            primaryButtonLabel="OK"
-            primaryButtonHandler={closeCartModal}
             handleCloseModal={closeCartModal}
+            primaryButtonLabel="Confirm"
+            primaryButtonHandler={
+              cartItems.length > 0 ? handleConfirmCart : null
+            }
+            secondaryButtonLabel="Continue shopping"
+            secondaryButtonHandler={closeCartModal}
           >
             <OrderSummary allowEdit="true" />
-          </BasicModal>
-        )}
-        {isConfirmationModalOpen && (
-          <BasicModal
-            title="Confirm cart items"
-            primaryButtonLabel="Submit"
-            primaryButtonHandler={handleConfirmCart}
-            secondaryButtonLabel="Close"
-            secondaryButtonHandler={closeConfirmationModal}
-            handleCloseModal={closeConfirmationModal}
-          >
-            <p>Do you want to confirm your cart, and go to checkout page?</p>
           </BasicModal>
         )}
       </main>

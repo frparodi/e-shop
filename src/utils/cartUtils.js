@@ -24,3 +24,22 @@ export const setItemAmount = (array, item, operation) => {
   }
   return newArray;
 };
+
+let formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
+export const formatToCurrency = (value) => formatter.format(value);
+
+export const getCartSummarizedData = (cart) => {
+  const cartSize = cart.reduce(
+    (sum, product) => (sum = sum + product.amount),
+    0
+  );
+  const cartCost = cart.reduce(
+    (cost, product) => (cost = cost + product.amount * product.price),
+    0
+  );
+  return [cartSize, cartCost];
+};

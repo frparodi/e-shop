@@ -23,10 +23,10 @@ function App() {
 
   return (
     <Switch>
-      <Route path={ADMIN}>
-        {isAuthenticated ? <Redirect to={PRODUCTS} /> : <Login />}
+      <Route exact path={ADMIN}>
+        {isAuthenticated ? <Redirect to={`${ADMIN}${PRODUCTS}`} /> : <Login />}
       </Route>
-      <Route path={PRODUCTS}>
+      <Route path={`${ADMIN}${PRODUCTS}`}>
         {isAuthenticated ? <Products /> : <Redirect to={ADMIN} />}
       </Route>
       <Route path={SHOP}>

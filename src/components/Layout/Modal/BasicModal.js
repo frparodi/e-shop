@@ -36,6 +36,7 @@ const BasicModal = (props) => {
             disabled={!primaryButtonHandler}
             onClick={primaryButtonHandler}
             customStyles={['primary']}
+            autoFocus={true}
           >
             {primaryButtonLabel}
           </Button>

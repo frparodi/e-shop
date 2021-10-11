@@ -4,6 +4,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  flex: 1;
 
   & > :nth-child(1) {
     display: flex;

@@ -8,6 +8,8 @@ const Button = ({
   children,
   customStyles = [],
   externalClasses = [],
+  buttonRef,
+  autoFocus = false,
   ...props
 }) => {
   const btnClass = `${classes.button} ${
@@ -21,6 +23,8 @@ const Button = ({
       type={type}
       onClick={onClick}
       className={`${btnClass} ${externalClasses.join(' ')}`}
+      autoFocus={autoFocus}
+      ref={buttonRef}
       {...props}
     >
       {children}
